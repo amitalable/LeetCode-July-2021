@@ -8,9 +8,6 @@ class TreeNode:
 
 
 class Solution:
-    def __init__(self) -> None:
-        self.res = 0
-
     def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
         stack = [root]
         res = 0
