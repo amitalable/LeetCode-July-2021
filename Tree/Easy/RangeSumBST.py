@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/range-sum-of-bst
 
+from typing import List
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -35,7 +38,7 @@ class Solution:
                 self.rangeSumBSTUsingRecursion(root.right, low, high)
         return 0
 
-    def insert(self, l: TreeNode) -> TreeNode:
+    def insert(self, l: List[int]) -> TreeNode:
         root = None
         if l:
             root = TreeNode(l.pop(0))
@@ -43,13 +46,14 @@ class Solution:
             while l:
                 # if there is only left node in l
                 y = stack.pop(0)
-                left = l.pop(0)
-                y.left = TreeNode(left) if left else None
-                if len(l) > 0:
-                    right = l.pop(0)
-                    y.right = TreeNode(right) if right else None
-                    stack.append(y.left)
-                    stack.append(y.right)
+                if y:
+                    left = l.pop(0)
+                    y.left = TreeNode(left) if left else None
+                    if len(l) > 0:
+                        right = l.pop(0)
+                        y.right = TreeNode(right) if right else None
+                        stack.append(y.left)
+                        stack.append(y.right)
         return root
 
 

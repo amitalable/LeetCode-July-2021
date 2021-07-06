@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/symmetric-tree/
 
+from typing import List
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -34,7 +37,7 @@ class Solution:
             return False
         return (t1.val == t2.val) and self.isMirror(t1.right, t2.left) and self.isMirror(t1.left, t2.right)
 
-    def insert(self, l):
+    def insert(self, l: List[int]) -> TreeNode:
         root = None
         if l:
             root = TreeNode(l.pop(0))
@@ -42,13 +45,14 @@ class Solution:
             while l:
                 # if there is only left node in l
                 y = stack.pop(0)
-                left = l.pop(0)
-                y.left = TreeNode(left) if left else None
-                if len(l) > 0:
-                    right = l.pop(0)
-                    y.right = TreeNode(right) if right else None
-                    stack.append(y.left)
-                    stack.append(y.right)
+                if y:
+                    left = l.pop(0)
+                    y.left = TreeNode(left) if left else None
+                    if len(l) > 0:
+                        right = l.pop(0)
+                        y.right = TreeNode(right) if right else None
+                        stack.append(y.left)
+                        stack.append(y.right)
         return root
 
 
