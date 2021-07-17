@@ -27,6 +27,40 @@ class Solution:
             i = numDict[nums[i]] + 1
         return res
 
+    def fourSumWithoutBisect(self, nums: List[int], target: int) -> List[List[int]]:
+        if len(nums) == 0:
+            return nums
+
+        nums = sorted(nums)
+        nums_len = len(nums)
+        res = []
+        i = 0
+        while i < nums_len:
+            j = i+1
+            while j < nums_len:
+                target_2 = target - nums[j] - nums[i]
+                front = j+1
+                back = nums_len - 1
+                while front < back:
+                    two_sum = nums[front] + nums[back]
+                    if two_sum < target_2:
+                        front += 1
+                    elif two_sum > target_2:
+                        back -= 1
+                    else:
+                        res.append([nums[i], nums[j], nums[front], nums[back]])
+                        while front < back and nums[front] == res[-1][2]:
+                            front += 1
+                        while front < back and nums[back] == res[-1][3]:
+                            back -= 1
+                while j+1 < nums_len and nums[j+1] == nums[j]:
+                    j += 1
+                j += 1
+            while i+1 < nums_len and nums[i+1] == nums[i]:
+                i += 1
+            i += 1
+        return res
+
 
 print(Solution().fourSum([5, 5, 3, 5, 1, -5, 1, -2],
                          4))
