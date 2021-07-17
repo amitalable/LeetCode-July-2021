@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/three-equal-parts/
 from typing import List
 from math import sqrt
 
