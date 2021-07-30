@@ -12,14 +12,9 @@ class MapSum:
     def insert(self, key: str, val: int) -> None:
         self.hashTable[key] = val
 
-    def sum(self, prefix: str) -> int:
-        prefix_len = len(prefix)
-        res = 0
-        for key, val in self.hashTable.items():
-            if key[:prefix_len] == prefix:
-                res += self.hashTable[key]
-        return res
-
+    def sum(self, prefix):
+        return sum(val for key, val in self.hashTable.items()
+                   if key.startswith(prefix))
 
 # Your MapSum object will be instantiated and called as such:
 # obj = MapSum()
